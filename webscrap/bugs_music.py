@@ -1,47 +1,43 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
-class Bugsmusic(object):
+class BugsMusic(object):
+
     url = ''
+    class_name = []
 
     def __str__(self):
-        return f'URL = {self.url}'
+        return self.url
 
-#https://music.bugs.co.kr/chart/track/realtime/total?wl_ref=M_contents_03_01
-
-    @staticmethod
-    def type(soup):
-        print(f'--------------------{type} RANKING--------------------')
+    def scrap(self):
+        soup = BeautifulSoup(urlopen(self.url), 'lxml')
         count = 0
-        for link1 in soup.find_all(name='p', attrs=({"class": f'{type}'})):
+        print("< ARTIST >")
+        for i in soup.find_all(name='p', attrs=({"class": class_name[0]})): #"artist"
             count += 1
             print(f'{str(count)} RANKING')
-            print(f'{type} : {link1.find("a").text}')
+            print(f'{class_name[0]}: {i.find("a").text}')
+        print("< TITLE >")
+        for i in soup.find_all(name='p', attrs=({"class": class_name[1]})): #"title"
+            count += 1
+            print(f'{str(count)} RANKING')
+            print(f'{class_name[1]}: {i.find("a").text}')
 
+# https://music.bugs.co.kr/chart/track/realtime/total?wl_ref=M_contents_03_01
     @staticmethod
     def main():
-        bugs = Bugsmusic()
-        soup = BeautifulSoup(urlopen(bugs.url), 'lxml')
+        bugs = BugsMusic()
         while 1:
-            menu = int(input(f'0. exit\n1. Input URL\n2. Artist Ranking\n3. Title Ranking\n4. delete\n'))
+            menu = int(input('0.Exit\n 1.Input URL\n 2.Get Ranking'))
             if menu == 0:
                 break
             elif menu == 1:
-                bugs.url = input('Input URL\n')
+                bugs.url = input('Input URL')
             elif menu == 2:
-                print(f'input URL is {bugs}')
-                print(Bugsmusic.type(str('artist')))
-
-            elif menu == 3:
-                print(f'input URL is {bugs}')
-                soup = BeautifulSoup(urlopen(bugs.url), 'lxml')
-                print('--------------------TITLE RANKING--------------------')
-                count = 0
-                for link1 in soup.find_all(name='p', attrs=({"class": "title"})):
-                    count += 1
-                    print(f'{str(count)} RANKING')
-                    print(f'ARTIST: {link1.find("a").text}')
+                bugs.class_name.append("artist")
+                bugs.class_name.append("title")
+                bugs.scrap()
             else:
                 print('Wrong Number')
                 continue
 
-Bugsmusic.main()
+BugsMusic.main()
