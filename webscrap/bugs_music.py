@@ -12,15 +12,15 @@ class BugsMusic(object):
         soup = BeautifulSoup(urlopen(self.url), 'lxml')
         count = 0
         print("< ARTIST >")
-        for i in soup.find_all(name='p', attrs=({"class": class_name[0]})): #"artist"
+        for i in soup.find_all(name='p', attrs=({"class": self.class_name[0]})): #"artist"
             count += 1
             print(f'{str(count)} RANKING')
-            print(f'{class_name[0]}: {i.find("a").text}')
+            print(f'{self.class_name[0]}: {i.find("a").text}')
         print("< TITLE >")
-        for i in soup.find_all(name='p', attrs=({"class": class_name[1]})): #"title"
+        for i in soup.find_all(name='p', attrs=({"class": self.class_name[1]})): #"title"
             count += 1
             print(f'{str(count)} RANKING')
-            print(f'{class_name[1]}: {i.find("a").text}')
+            print(f'{self.class_name[1]}: {i.find("a").text}')
 
 # https://music.bugs.co.kr/chart/track/realtime/total?wl_ref=M_contents_03_01
     @staticmethod

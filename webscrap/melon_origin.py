@@ -2,7 +2,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
-class Meloncha(object):
+class Bugs2(object): # 크롤링 베이스 형태
     url = ''
     hdr = {'User-Agent': 'Mozilla/5.0'}
     class_name = []
@@ -13,29 +13,29 @@ class Meloncha(object):
     def set_class_name(self, class_name):
         self.class_name = class_name
 
-    def get_rank(self):
+    def get_ranking(self):
         req = urllib.request.Request(self.url, headers=self.hdr)
         html = urllib.request.urlopen(req).read()
         soup = BeautifulSoup(html, 'html.parser')
-        print('------------TITLE------------')
-        for i in soup.find_all("div", {"class":self.class_name[0]}):
-            print(f'{i.find("a").text}')
-        print('------------ARTIST------------')
+        print('-----------TITLE-----------')
+        for i in soup.find_all("div", {"class": self.class_name[0]}):
+            print(f' {i.find("a").text}')
+        print('-----------ARTIST-----------')
         for i in soup.find_all("div", {"class": self.class_name[1]}):
-            print(f'{i.find("a").text}')
+            print(f' {i.find("a").text}')
 
     @staticmethod
     def main():
-        mel = Meloncha()
+        b = Bugs2()
         while 1:
-            m = input('1. input 2. output')
+            m = input('1. input date 2. output')
             if m == '1':
-                mel.set_url('2021052513')
+                b.set_url('2021052513')
             elif m == '2':
-                mel.class_name.append('ellipsis rank01')
-                mel.class_name.append('ellipsis rank02')
-                mel.get_rank()
+                b.class_name.append('ellipsis rank01')
+                b.class_name.append('ellipsis rank02')
+                b.get_ranking()
             else:
                 print('wrong numb')
 
-Meloncha.main()
+Bugs2.main()

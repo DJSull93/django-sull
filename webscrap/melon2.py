@@ -2,7 +2,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
-class Meloncha(object):
+class Melon(object):
     url = ''
     hdr = {'User-Agent': 'Mozilla/5.0'}
     class_name = []
@@ -17,16 +17,16 @@ class Meloncha(object):
         req = urllib.request.Request(self.url, headers=self.hdr)
         html = urllib.request.urlopen(req).read()
         soup = BeautifulSoup(html, 'html.parser')
-        print('------------TITLE------------')
-        for i in soup.find_all("div", {"class":self.class_name[0]}):
+        print('----------TITLE----------')
+        for i in soup.find_all("div", {"class": self.class_name[0]}):
             print(f'{i.find("a").text}')
-        print('------------ARTIST------------')
+        print('----------ARTIST----------')
         for i in soup.find_all("div", {"class": self.class_name[1]}):
             print(f'{i.find("a").text}')
 
     @staticmethod
     def main():
-        mel = Meloncha()
+        mel = Melon()
         while 1:
             m = input('1. input 2. output')
             if m == '1':
@@ -38,4 +38,4 @@ class Meloncha(object):
             else:
                 print('wrong numb')
 
-Meloncha.main()
+Melon.main()

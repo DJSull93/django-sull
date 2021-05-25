@@ -16,7 +16,7 @@ class Wikipedia(object):
             elif menu == 2:
                 print(f'URL = {wiki}\n')
             else:
-                print('wrong number')
+                print(f'wrong number')
                 continue
 
 Wikipedia.main()
