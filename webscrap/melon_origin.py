@@ -10,9 +10,6 @@ class Bugs2(object): # 크롤링 베이스 형태
     def set_url(self, time):
         self.url = f'https://www.melon.com/chart/index.htm?dayTime={time}'
 
-    def set_class_name(self, class_name):
-        self.class_name = class_name
-
     def get_ranking(self):
         req = urllib.request.Request(self.url, headers=self.hdr)
         html = urllib.request.urlopen(req).read()
