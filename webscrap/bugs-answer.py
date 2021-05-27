@@ -27,9 +27,8 @@ class BugsMusic(object):
             self.dict[self.title_ls[i]] = self.artist_ls[i]
         2. enum
         for i, j in enumerate(self.title_ls):
-            self.dict[self.title_ls[j]] = self.artist_ls[i]
+            self.dict[j] = self.artist_ls[i]
         3. zip
-
         for i, j in zip(self.title_ls, self.artist_ls):
             self.title_ls[i] = j
         '''
