@@ -19,8 +19,7 @@ if __name__ == '__main__':
             #plot.draw_sex()
             #plot.draw_embarked()
         elif m == '2':
-            controller = Controller()
-            controller.preprocess('train.csv', 'test.csv')
+            Controller().preprocess('train.csv', 'test.csv')
         elif m == '3':
             pass
         elif m == '4':
