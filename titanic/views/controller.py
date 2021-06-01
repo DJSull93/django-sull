@@ -17,10 +17,29 @@ class Controller(object):
     def preprocess(self, train, test) -> object:
         service = self.service
         this = self.dataset
+        # make model prototype
         this.train = service.new_model(train)
         this.test = service.new_model(test)
+        # Eliminates unnecessary features (Cabin, Ticket)
+        this = service.drop_feature(this, 'Cabin')
+        this = service.drop_feature(this, 'Ticket')
+        # Structuring by nominal, ordinal
+        this = service.embarked_nominal(this)
+        this = service.title_nominal(this)
+        # eliminate 'Name'
+        this = service.drop_feature(this, 'Name')
+        this = service.gender_nominal(this)
+        this = service.drop_feature(this, 'Sex')
+        self.print_this(this)
+        return this
+
+    @staticmethod
+    def print_this(this):
+        print('*'*100)
         print(f'Trains type is {type(this.train)}')
         print(f'Trains colums is \n{this.train.columns}')
+        print(f'Trains TOP5 is \n{this.train.head()}')
         print(f'tests type is {type(this.test)}')
         print(f'tests colums is \n{this.test.columns}')
-        return this
+        print(f'tests TOP5 is \n{this.test.head()}')
+        print('*' * 100)
