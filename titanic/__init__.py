@@ -21,8 +21,8 @@ if __name__ == '__main__':
         elif m == '2':
             Controller().modeling('train.csv', 'test.csv')
         elif m == '3':
-            pass
+            Controller().learning('train.csv', 'test.csv')
         elif m == '4':
-            pass
+            Controller().submit('train.csv', 'test.csv')
         else:
             continue
